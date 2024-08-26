@@ -1,5 +1,12 @@
 <?php
 
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +21,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [LoginController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [LoginController::class, 'logout']);
+
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('chats', ChatController::class);
+    Route::apiResource('messages', MessageController::class);
+    Route::apiResource('media', MediaController::class);
+    Route::apiResource('contacts', ContactController::class);
+
+    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+        return $request->user();
+    });
 });
