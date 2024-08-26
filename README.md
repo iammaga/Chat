@@ -28,4 +28,53 @@
 
 ```bash
 git clone https://github.com/iammaga/chat.git
+```
+
+```bash
 cd chat
+```
+
+### Установка зависимостей
+
+```bash
+composer install
+npm install
+```
+
+### Создайте файл .env из примера:
+
+```bash
+cp .env.example .env
+```
+
+### Отредактируйте файл .env и укажите параметры подключения к базе данных и другие настройки:
+
+```bash
+DB_CONNECTION=mariadb
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+
+# Другие настройки
+```
+
+### Выполнение миграций
+
+```bash
+php artisan migrate
+```
+
+### Запуск сервера
+
+```bash
+php artisan serve
+```
+
+### Сборка frontend-ресурсов
+
+```bash
+npm run dev
+npm run prod
+```
