@@ -6,11 +6,17 @@ use App\Http\Requests\StoreChatRequest;
 use App\Http\Requests\UpdateChatRequest;
 use App\Http\Resources\ChatResource;
 use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ChatController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->except('index', 'show');
+    }
+
     /**
      * Display a paginated listing of chats.
      *
@@ -18,6 +24,7 @@ class ChatController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', User::class);
         $chats = Chat::paginate(10);
 
         return ChatResource::collection($chats);
@@ -31,6 +38,7 @@ class ChatController extends Controller
      */
     public function store(StoreChatRequest $request)
     {
+        $this->authorize('create', User::class);
         $chat = Chat::create($request->validated());
 
         return new ChatResource($chat);
@@ -44,6 +52,8 @@ class ChatController extends Controller
      */
     public function show(Chat $chat)
     {
+        $this->authorize('view', $chat);
+
         return new ChatResource($chat);
     }
 
@@ -56,6 +66,7 @@ class ChatController extends Controller
      */
     public function update(UpdateChatRequest $request, Chat $chat)
     {
+        $this->authorize('update', $chat);
         $chat->update($request->validated());
 
         return new ChatResource($chat);
@@ -69,6 +80,7 @@ class ChatController extends Controller
      */
     public function destroy(Chat $chat)
     {
+        $this->authorize('delete', $chat);
         $chat->delete();
 
         return response()->json(null, Response::HTTP_NO_CONTENT);

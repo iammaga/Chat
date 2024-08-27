@@ -27,8 +27,8 @@ Route::post('login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [LoginController::class, 'logout']);
 
-    Route::apiResource('users', UserController::class);
-    Route::apiResource('chats', ChatController::class);
+    Route::apiResource('users', UserController::class)->middleware('role:admin');
+    Route::apiResource('chats', ChatController::class)->middleware('permission:manage-chats');
     Route::apiResource('messages', MessageController::class);
     Route::apiResource('media', MediaController::class);
     Route::apiResource('contacts', ContactController::class);

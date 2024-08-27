@@ -10,11 +10,17 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('role:admin')->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
+        $this->authorize('viewAny', User::class);
         $perPage = $request->input('per_page', 10);
         $users = User::paginate($perPage);
 
@@ -26,6 +32,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        $this->authorize('create', User::class);
         $user = User::create($request->validated());
 
         return new UserResource($user, 201);
@@ -36,6 +43,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        $this->authorize('view', $user);
+
         return new UserResource($user);
     }
 
@@ -44,6 +53,7 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        $this->authorize('update', $user);
         $user->update($request->validated());
 
         return new UserResource($user);
@@ -54,6 +64,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('delete', $user);
         $user->delete();
 
         return response()->json(null, Response::HTTP_NO_CONTENT);
