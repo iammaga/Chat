@@ -13,7 +13,7 @@ class LoginController extends Controller
     {
         $this->validate($request, [
             'email' => 'required|string|email',
-            'password' => 'required|string',
+            'password' => 'required|string|min:8',
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -29,15 +29,13 @@ class LoginController extends Controller
 
         return response()->json([
             'token' => $token,
+            'token_type' => 'Bearer',
         ]);
     }
 
     public function logout(Request $request)
     {
-        $user = $request->user();
-
-        // Удаление всех токенов пользователя
-        $user->tokens()->delete();
+        $request->user()->tokens()->delete();
 
         return response()->json([
             'message' => 'Successfully logged out'

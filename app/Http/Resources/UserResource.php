@@ -16,14 +16,13 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'username' => $this->username,
-            'phone' => $this->phone,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'username' => $this->username,
+            'email' => $this->email,
+            'phone' => $this->phone,
             'profile_picture_url' => $this->profile_picture_url,
             'profile_photo_path' => $this->profile_photo_path,
-            'email' => $this->email,
         ];
     }
 }

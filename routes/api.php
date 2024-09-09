@@ -21,19 +21,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('register', [RegisterController::class, 'register']);
-Route::post('login', [LoginController::class, 'login']);
+Route::group(['prefix' => 'v1'], function () {
+    Route::post('register', [RegisterController::class, 'register']);
+    Route::post('login', [LoginController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('logout', [LoginController::class, 'logout']);
+//    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('logout', [LoginController::class, 'logout']);
 
-    Route::apiResource('users', UserController::class)->middleware('role:admin');
-    Route::apiResource('chats', ChatController::class)->middleware('permission:manage-chats');
-    Route::apiResource('messages', MessageController::class);
-    Route::apiResource('media', MediaController::class);
-    Route::apiResource('contacts', ContactController::class);
-
-    Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-        return $request->user();
-    });
+        Route::apiResources([
+            'users' => UserController::class,
+            'chats' => ChatController::class,
+            'messages' => MessageController::class,
+            'media' => MediaController::class,
+            'contacts' => ContactController::class,
+        ]);
+//    });
 });
+

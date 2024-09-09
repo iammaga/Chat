@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('username')->unique()->nullable()->after('name');
+            $table->string('first_name')->nullable()->after('id');
+            $table->string('last_name')->nullable()->after('first_name');
+            $table->string('username')->unique()->nullable()->after('last_name');
             $table->string('phone')->unique()->nullable()->after('username');
             $table->string('password_hash')->nullable()->after('password');
-            $table->string('first_name')->nullable()->after('phone');
-            $table->string('last_name')->nullable()->after('first_name');
             $table->string('profile_picture_url')->nullable()->after('profile_photo_path');
         });
     }
@@ -27,7 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['username', 'phone', 'password_hash', 'first_name', 'last_name', 'profile_picture_url']);
+            $table->dropColumn(['first_name', 'last_name', 'username', 'phone', 'password_hash', 'profile_picture_url']);
         });
     }
 };
