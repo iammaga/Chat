@@ -11,6 +11,7 @@ use Laratrust\Models\Role;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 //use Laratrust\Traits\LaratrustUserTrait;
 
 class User extends Authenticatable
@@ -20,6 +21,7 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasRoles;
 //    use LaratrustUserTrait;
 
     /**

@@ -7,7 +7,6 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,20 +20,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'v1'], function () {
-    Route::post('register', [RegisterController::class, 'register']);
-    Route::post('login', [LoginController::class, 'login']);
+Route::post('register', [RegisterController::class, 'register']);
+Route::post('login', [LoginController::class, 'login']);
 
-//    Route::middleware('auth:sanctum')->group(function () {
-        Route::post('logout', [LoginController::class, 'logout']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::group(['middleware' => 'role:admin'], function () {
+        Route::apiResource('users', UserController::class);
+    });
 
-        Route::apiResources([
-            'users' => UserController::class,
-            'chats' => ChatController::class,
-            'messages' => MessageController::class,
-            'media' => MediaController::class,
-            'contacts' => ContactController::class,
-        ]);
-//    });
+    Route::group(['middleware' => 'role:admin|user'], function () {
+        Route::get('chats', [ChatController::class, 'index']);
+        Route::apiResource('chats', ChatController::class);
+    });
+
+    Route::apiResources([
+        'messages' => MessageController::class,
+        'media' => MediaController::class,
+        'contacts' => ContactController::class,
+    ]);
 });
-
