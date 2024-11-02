@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return view('telegram-clone');
+});
+
+Route::get('/home', function () {
     return view('welcome');
 });
 
