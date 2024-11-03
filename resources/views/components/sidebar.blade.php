@@ -1,6 +1,6 @@
-<div x-data="{ isSearching: false }" :class="darkMode ? 'bg-black border-gray-700' : 'bg-white border-gray-200'"
+<div x-data="{ isSearching: false }" :class="darkMode ? 'bg-black border-gray-900' : 'bg-white border-gray-200'"
      class="w-full sm:w-64 border-r">
-    <div :class="darkMode ? 'border-gray-700' : 'border-gray-200'" class="p-4 border-b">
+    <div :class="darkMode ? 'border-gray-900' : 'border-gray-200'" class="p-4 border-b">
         <div class="flex items-center justify-between">
             <button @click="showSettings = !showSettings">
                 <svg :class="darkMode ? 'text-gray-400' : 'text-gray-500'" class="h-6 w-6" fill="none"

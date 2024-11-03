@@ -1,22 +1,25 @@
-<div x-show="!showSettings" class="flex-1 flex flex-col">
+<div x-show="!showSettings" class="flex-1 flex flex-col h-full">
     <template x-if="selectedChat">
-        <div>
-            <div :class="darkMode ? 'bg-black border-gray-700' : 'bg-white border-gray-200'" class="p-4 border-b">
+        <div class="flex flex-col h-full">
+            <!-- Заголовок чата -->
+            <div :class="darkMode ? 'bg-black border-stone-700' : 'bg-white border-gray-200'" class="p-4 border-b">
                 <h2 class="font-semibold" x-text="selectedChat.name"></h2>
             </div>
-            <div :class="darkMode ? 'bg-gray-900' : 'bg-gray-100'" class="flex-1 overflow-y-auto p-4">
-                <!-- Chat messages would go here -->
+            <!-- Сообщения чата, которые занимают всё доступное пространство -->
+            <div :class="darkMode ? 'bg-stone-950' : 'bg-stone-100'" class="flex-1 overflow-y-auto p-4">
+                <!-- Здесь будут сообщения чата -->
             </div>
-            <div :class="darkMode ? 'bg-black border-gray-700' : 'bg-white border-gray-200'" class="p-4 border-t">
+            <!-- Блок ввода сообщения, прикреплённый к низу -->
+            <div :class="darkMode ? 'bg-black border-stone-700' : 'bg-white border-gray-200'" class="p-4 border-t">
                 <div class="flex items-center">
-                    <svg :class="darkMode ? 'text-gray-400' : 'text-gray-500'" class="h-6 w-6 mr-2" fill="none"
+                    <svg :class="darkMode ? 'text-stone-400' : 'text-stone-500'" class="h-6 w-6 mr-2" fill="none"
                          viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                               d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"></path>
                     </svg>
                     <input
                         type="text"
-                        placeholder="Write a message..."
+                        placeholder="Написать сообщение..."
                         :class="darkMode ? 'bg-gray-700 text-white border-gray-600' : 'bg-white border-gray-300'"
                         class="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
@@ -35,7 +38,7 @@
     </template>
     <template x-if="!selectedChat">
         <div :class="darkMode ? 'text-gray-400' : 'text-gray-500'" class="flex items-center justify-center h-full">
-            Select a chat to start messaging
+            Выберите чат, чтобы начать общение
         </div>
     </template>
 </div>

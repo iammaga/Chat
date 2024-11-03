@@ -1,5 +1,5 @@
 <div x-show="showSettings" :class="darkMode ? 'bg-black' : 'bg-white'" class="p-4">
-    <h2 class="text-2xl font-semibold mb-4">Settings</h2>
+    <h2 class="text-2xl font-semibold mb-4">Настройки</h2>
     <div :class="darkMode ? 'bg-gray-900' : 'bg-gray-100'"
          class="flex items-center justify-between p-4 rounded-lg mb-2">
         <div class="flex items-center">
@@ -8,7 +8,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
             </svg>
-            <span>Dark Mode</span>
+            <span>Темный режим</span>
         </div>
         <button
             @click="toggleDarkMode"
@@ -19,5 +19,5 @@
                  class="w-4 h-4 bg-white rounded-full shadow-md transform duration-300 ease-in-out"></div>
         </button>
     </div>
-    <!-- Add more settings options here -->
+    <!-- Добавьте другие настройки здесь -->
 </div>
