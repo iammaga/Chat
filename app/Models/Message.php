@@ -20,4 +20,9 @@ class Message extends Model
     {
         return $this->hasOne(MessageStatus::class);
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

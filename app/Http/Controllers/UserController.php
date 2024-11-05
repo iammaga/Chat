@@ -21,10 +21,21 @@ class UserController extends Controller
     public function index(Request $request)
     {
 //        $this->authorize('viewAny', User::class);
-        $perPage = $request->input('per_page', 10);
-        $users = User::paginate($perPage);
+        $users = User::all();
+        $messages = [];
 
-        return UserResource::collection($users);
+        foreach ($users as $user) {
+            $messages[$user->first_name . ' ' . $user->last_name] = [];
+        }
+
+        $firstUser = $users->first();
+        $selectedUser = ucfirst($firstUser) ? ucfirst($firstUser->first_name) . ' ' . ucfirst($firstUser->last_name) : '';
+
+        return view('chat.index', compact('users', 'selectedUser', 'messages'), [
+            'users' => UserResource::collection($users),
+            'messages' => $messages,
+            'selectedUser' => $selectedUser
+        ]);
     }
 
     /**

@@ -25,7 +25,7 @@ class StoreMediaRequest extends FormRequest
             'media_url' => 'required|url',
             'media_type' => 'required|string|max:255',
             'user_id' => 'required|exists:users,id',
-            'chat_id' => 'nullable|exists:chats,id',
+            'chat_id' => 'nullable|exists:chat,id',
             'message_id' => 'nullable|exists:messages,id',
         ];
     }

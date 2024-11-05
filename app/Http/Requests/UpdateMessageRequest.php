@@ -22,7 +22,7 @@ class UpdateMessageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'chat_id' => 'sometimes|exists:chats,id',
+            'chat_id' => 'sometimes|exists:chat,id',
             'user_id' => 'sometimes|exists:users,id',
             'content' => 'sometimes|string',
         ];

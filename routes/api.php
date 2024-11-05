@@ -24,13 +24,13 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::post('login', [LoginController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::group(['middleware' => 'role:admin'], function () {
+//    Route::group(['middleware' => 'role:admin'], function () {
         Route::apiResource('users', UserController::class);
-    });
+//    });
 
     Route::group(['middleware' => 'role:admin|user'], function () {
-        Route::get('chats', [ChatController::class, 'index']);
-        Route::apiResource('chats', ChatController::class);
+        Route::get('chat', [ChatController::class, 'index']);
+        Route::apiResource('chat', ChatController::class);
     });
 
     Route::apiResources([

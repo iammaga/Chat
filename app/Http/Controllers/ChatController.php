@@ -18,16 +18,17 @@ class ChatController extends Controller
 //    }
 
     /**
-     * Display a paginated listing of chats.
+     * Display a paginated listing of chat.
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
 //        $this->authorize('viewAny', User::class);
-        $chats = Chat::paginate(10);
+        $chats = Chat::with('messages.user')->paginate(10);
 
-        return ChatResource::collection($chats);
+        // Убедитесь, что здесь указано имя представления 'chat'
+        return view('chat', compact('chats'));
     }
 
     /**

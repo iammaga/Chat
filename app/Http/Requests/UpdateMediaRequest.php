@@ -25,7 +25,7 @@ class UpdateMediaRequest extends FormRequest
             'media_url' => 'sometimes|url',
             'media_type' => 'sometimes|string|max:255',
             'user_id' => 'sometimes|exists:users,id',
-            'chat_id' => 'nullable|exists:chats,id',
+            'chat_id' => 'nullable|exists:chat,id',
             'message_id' => 'nullable|exists:messages,id',
         ];
     }

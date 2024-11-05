@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('telegram');
 });
+
+Route::get('/chats', [UserController::class, 'index'])->name('users');
 
 Route::get('/home', function () {
     return view('welcome');

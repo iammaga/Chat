@@ -14,9 +14,15 @@ class ChatResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $data = $this->messages()->with('user')->latest()->first();
+
         return [
             'id' => $this->id,
-            'name' => ucfirst($this->name),
+            'name' => ucfirst($data->user->name),
+            'surname' => ucfirst($data->user->surname),
+            'profile_picture_path' => $data->user->profile_picture_path,
+            'content' => $data->content,
+            'time' => $data->created_at->diffForHumans(),
             'created_at' => $this->created_at->format('d-m-Y H:i'),
             'updated_at' => $this->updated_at->format('d-m-Y H:i'),
         ];
