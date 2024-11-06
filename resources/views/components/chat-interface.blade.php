@@ -1,12 +1,15 @@
-@props(['isDarkMode' => true, 'users' => [], 'selectedUser' => null, 'messages' => []])
+@props(['isDarkMode' => true, 'users' => [], 'messages' => []])
 
 <div x-data="{
     isDarkMode: @js($isDarkMode),
-    selectedUser: @js($selectedUser),
+    selectedUser: null,
     messages: @js($messages),
     newMessage: '',
     sendMessage() {
-        if (this.newMessage.trim()) {
+        if (this.newMessage.trim() && this.selectedUser) {
+            if (!this.messages[this.selectedUser]) {
+                this.messages[this.selectedUser] = [];
+            }
             this.messages[this.selectedUser].push({
                 id: Date.now(),
                 content: this.newMessage,
@@ -17,12 +20,12 @@
         }
     }
 }"
-     class="flex h-screen"
+     class="flex h-screen overflow-hidden"
      :class="isDarkMode ? 'bg-zinc-950 text-zinc-50' : 'bg-white text-zinc-950'">
 
-    <x-chat-sidebar :users="$users" :messages="$messages" :selectedUser="$selectedUser" />
+    <x-chat-sidebar :users="$users"/>
 
-    <x-chat-main />
+    <x-chat-main/>
 
 </div>
 

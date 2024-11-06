@@ -2,7 +2,7 @@
 
 <div class="w-80 border-r" :class="isDarkMode ? 'border-zinc-800' : 'border-zinc-200'">
     <div class="p-4 flex items-center justify-between">
-        <h1 class="text-2xl font-black">Чаты ({{ count($users) }})</h1>
+        <h1 class="text-2xl font-black">Чаты({{ count($users) }})</h1>
         <div class="flex gap-2">
             <button @click="isDarkMode = !isDarkMode" class="p-2 rounded-full"
                     :class="isDarkMode ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-950'">
