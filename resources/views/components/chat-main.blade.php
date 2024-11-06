@@ -3,7 +3,12 @@
         <div class="p-4 border-b flex items-center justify-between"
              :class="isDarkMode ? 'border-zinc-800' : 'border-zinc-200'">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold">
+                <div
+                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold"
+                    :class="{
+                        'bg-zinc-50 text-zinc-950': isDarkMode,
+                        'bg-zinc-300 text-zinc-950': !isDarkMode
+                    }">
                     <span x-text="selectedUser.substring(0, 2)"></span>
                 </div>
                 <div>

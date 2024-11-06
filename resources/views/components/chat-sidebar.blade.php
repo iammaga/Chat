@@ -34,7 +34,11 @@
                     'hover:text-zinc-950': !isDarkMode
                 }">
                 <div
-                    class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold overflow-hidden">
+                    class="w-10 h-10 rounded-full flex items-center justify-center font-bold overflow-hidden"
+                    :class="{
+                        'bg-zinc-50 text-zinc-950': isDarkMode,
+                        'bg-zinc-300 text-zinc-950': !isDarkMode
+                    }">
                     @if($user->profile_photo_path)
                         <img src="{{ $user->profile_photo_path }}" alt="{{ $user->first_name }}"
                              class="w-full h-full object-cover">
@@ -42,6 +46,7 @@
                         <span>{{ substr($user->first_name, 0, 1) }}{{ substr($user->last_name, 0, 1) }}</span>
                     @endif
                 </div>
+
                 <div class="flex-1">
                     <div class="font-medium">{{ $user->first_name }} {{ $user->last_name }}</div>
                     @if($user->email)
